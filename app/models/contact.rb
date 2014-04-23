@@ -15,4 +15,18 @@ class Contact < ActiveRecord::Base
     WHERE contacts.user_id = :user_id OR contact_shares.user_id = :user_id
     SQL
   end
+
+  def self.favorite_contacts_for_user_id(user_id)
+    Contact.find_by_sql([<<-SQL, user_id: user_id])
+    SELECT DISTINCT contacts.*
+    FROM contacts
+    WHERE
+      ( contacts.user_id = :user_id AND contacts.favorite = 't' )
+    OR contacts.id IN (
+      SELECT s.contact_id
+      FROM contact_shares AS s
+      WHERE s.user_id = :user_id AND s.favorite = 't' )
+    SQL
+  end
+
 end

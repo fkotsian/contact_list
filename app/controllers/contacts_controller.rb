@@ -38,10 +38,14 @@ class ContactsController < ApplicationController
     end
   end
 
+  def favorites
+    @favorite_contacts = Contact.favorite_contacts_for_user_id(params[:user_id])
+    render json: @favorite_contacts
+  end
 
   private
   def contact_params
-    params.require(:contact).permit(:name, :email, :user_id)
+    params.require(:contact).permit(:name, :email, :user_id, :favorite)
   end
 
 end

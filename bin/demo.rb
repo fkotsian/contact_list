@@ -5,7 +5,7 @@ url = Addressable::URI.new(
   scheme: 'http',
   host: 'localhost',
   port: 3000,
-  path: '/contact_shares/2'
+  path: '/contacts/3'
 ).to_s
 
 
@@ -18,4 +18,4 @@ url = Addressable::URI.new(
 # )
 
 
-puts RestClient.delete(url, {})
+puts RestClient.patch(url, { contact: { favorite: true} } )

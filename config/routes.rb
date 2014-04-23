@@ -7,4 +7,7 @@ ViralContact::Application.routes.draw do
 
  resources :contact_shares, only: [:create, :destroy]
  resources :comments, only: [:index]
+
+
+ get  'users/:user_id/favorite_contacts', to:  'contacts#favorites'
 end
