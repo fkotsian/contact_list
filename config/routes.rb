@@ -6,4 +6,5 @@ ViralContact::Application.routes.draw do
  resources :contacts, except: [:index, :new, :edit]
 
  resources :contact_shares, only: [:create, :destroy]
+ resources :comments, only: [:index]
 end
